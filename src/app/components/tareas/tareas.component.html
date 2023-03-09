@@ -10,15 +10,17 @@
     </div>
     <div class="col-lg-6 offset-lg-3 mt-3">
         <div *ngIf="listTareas.length === 0" class="card p-2">
-            <h6>No hay tareas para mostrar</h6>
+            <h6 class="text-center">No hay tareas para mostrar</h6>
         </div>
         <ul class="list-group">
-            <li *ngFor="let tarea of listTareas" class="list-group-item mt-1 d-flex justify-content-between">
-                <span class="cursor">
-                    <i class="far fa-circle"></i>
+            <li *ngFor="let tarea of listTareas; let i = index" class="list-group-item mt-1 d-flex justify-content-between">
+                <span class="cursor" (click)="actualizarTarea(tarea,i)">
+                    <i [class.text-success]="tarea.estado" [ngClass]="tarea.estado ? 'fas fa-check-circle' : 'far fa-circle'"></i>
+                    <!--<i class="far fa-circle"></i>-->
+                    <!--<i class="fa-solid fa-circle-check"></i>-->
                 </span>
                     {{tarea.nombre}}
-                <span class="cursor text-danger">
+                <span class="cursor text-danger" (click)="eliminarTarea(i)">
                     <i class="fas fa-trash-alt"></i>
                 </span>
             </li>
